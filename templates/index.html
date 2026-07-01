@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upload handwritten Python code images for automatic OCR recognition, intelligent correction, and safe sandboxed execution.">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>Handwritten Code Evaluator</title>
+
+    <!-- Google Fonts: Inter (body) + JetBrains Mono (code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- ===== Loading Spinner Overlay ===== -->
+    <div id="loading-overlay" class="loading-overlay" aria-hidden="true">
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p class="spinner-text">Evaluating your code&hellip;</p>
+        </div>
+    </div>
+
+    <!-- ===== Header ===== -->
+    <header class="app-header">
+        <h1 class="app-title"><span class="title-icon">📝</span> Handwritten Code Evaluator</h1>
+        <p class="app-tagline">Upload handwritten Python code &rarr; OCR &rarr; Execute</p>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main class="container">
+
+        <!-- Upload Section -->
+        <section id="upload-section" class="card upload-card" aria-label="Upload handwritten code image">
+            <h2 class="section-title">Upload Image</h2>
+
+            <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="Drag and drop an image or click to browse">
+                <div class="drop-zone-content">
+                    <span class="drop-zone-icon">📤</span>
+                    <p class="drop-zone-primary">Drag &amp; drop your image here</p>
+                    <p class="drop-zone-secondary">or <span class="browse-link">click to browse</span></p>
+                    <p class="drop-zone-hint">PNG, JPG &bull; Max 5 MB</p>
+                </div>
+                <!-- Hidden file input -->
+                <input type="file" id="file-input" accept=".png,.jpg,.jpeg" hidden>
+            </div>
+
+            <p id="file-name-display" class="file-name-display" aria-live="polite"></p>
+            <p id="file-error" class="file-error" role="alert" aria-live="assertive"></p>
+
+            <!-- Image Preview -->
+            <div id="image-preview-container" class="image-preview-container" hidden>
+                <img id="image-preview" class="image-preview" alt="Uploaded image preview">
+            </div>
+
+            <button id="evaluate-btn" class="btn-evaluate" type="button" disabled>
+                <span class="btn-icon">🚀</span> Evaluate
+            </button>
+        </section>
+
+        <!-- Results Section (hidden until evaluation completes) -->
+        <section id="results-section" class="results-section" hidden aria-label="Evaluation results">
+
+            <!-- Recognized Text Card -->
+            <article id="recognized-text-card" class="card result-card">
+                <h2 class="section-title">
+                    <span class="card-icon">🔍</span> Recognized Text
+                </h2>
+                <pre id="recognized-text" class="code-block raw-text"></pre>
+            </article>
+
+            <!-- Corrected Code Card -->
+            <article id="corrected-code-card" class="card result-card">
+                <div class="card-header-row">
+                    <h2 class="section-title">
+                        <span class="card-icon">✨</span> Corrected Code
+                    </h2>
+                    <span id="correction-badge" class="badge"></span>
+                </div>
+                <pre class="code-block"><code id="corrected-code"></code></pre>
+            </article>
+
+            <!-- Execution Output Card -->
+            <article id="execution-output-card" class="card result-card">
+                <div class="card-header-row">
+                    <h2 class="section-title">
+                        <span class="card-icon">▶️</span> Execution Output
+                    </h2>
+                    <span id="status-badge" class="badge"></span>
+                </div>
+
+                <div id="stdout-panel" class="output-panel stdout-panel">
+                    <h3 class="output-label">stdout</h3>
+                    <pre id="stdout-content" class="code-block"></pre>
+                </div>
+
+                <div id="stderr-panel" class="output-panel stderr-panel" hidden>
+                    <h3 class="output-label output-label--error">stderr</h3>
+                    <pre id="stderr-content" class="code-block stderr-block"></pre>
+                </div>
+
+                <p id="execution-time" class="execution-time"></p>
+            </article>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="app-footer">
+        <p>Built by <a href="#" class="footer-link" target="_blank" rel="noopener">Siddharth Senguttuvan</a></p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
