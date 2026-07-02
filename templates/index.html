@@ -27,11 +27,17 @@
     <!-- ===== Header ===== -->
     <header class="app-header">
         <h1 class="app-title"><span class="title-icon">📝</span> Handwritten Code Evaluator</h1>
-        <p class="app-tagline">Upload handwritten Python code &rarr; OCR &rarr; Execute</p>
+        <p class="app-tagline">Upload handwritten code &rarr; OCR &rarr; Execute &bull; Python, JavaScript, Java, C++</p>
     </header>
 
     <!-- ===== Main Content ===== -->
     <main class="container">
+
+        <!-- Sandbox Mode Warning (shown when Docker isolation is unavailable) -->
+        <div id="sandbox-warning" class="sandbox-warning" hidden role="alert">
+            <span class="sandbox-warning-icon">⚠️</span>
+            <span class="sandbox-warning-text">Running without container isolation — code executes as a local subprocess</span>
+        </div>
 
         <!-- Upload Section -->
         <section id="upload-section" class="card upload-card" aria-label="Upload handwritten code image">
@@ -54,6 +60,17 @@
             <!-- Image Preview -->
             <div id="image-preview-container" class="image-preview-container" hidden>
                 <img id="image-preview" class="image-preview" alt="Uploaded image preview">
+            </div>
+
+            <!-- Language Selector -->
+            <div class="language-selector-wrapper">
+                <label for="language-select" class="language-label">Language</label>
+                <select id="language-select" class="language-select">
+                    <option value="python" selected>🐍 Python</option>
+                    <option value="javascript">📜 JavaScript</option>
+                    <option value="java">☕ Java</option>
+                    <option value="cpp">⚙️ C++</option>
+                </select>
             </div>
 
             <button id="evaluate-btn" class="btn-evaluate" type="button" disabled>
@@ -103,6 +120,14 @@
                 </div>
 
                 <p id="execution-time" class="execution-time"></p>
+            </article>
+
+            <!-- Diagnostics Card (shown when syntax correction has issues) -->
+            <article id="diagnostics-card" class="card result-card" hidden>
+                <h2 class="section-title">
+                    <span class="card-icon">🔧</span> Correction Diagnostics
+                </h2>
+                <ul id="diagnostics-list" class="diagnostics-list"></ul>
             </article>
         </section>
     </main>

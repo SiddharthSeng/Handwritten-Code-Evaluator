@@ -25,6 +25,10 @@
     const evaluateBtn           = document.getElementById('evaluate-btn');
     const loadingOverlay        = document.getElementById('loading-overlay');
     const resultsSection        = document.getElementById('results-section');
+    const languageSelect        = document.getElementById('language-select');
+    const sandboxWarning        = document.getElementById('sandbox-warning');
+    const diagnosticsCard       = document.getElementById('diagnostics-card');
+    const diagnosticsList       = document.getElementById('diagnostics-list');
 
     // Result elements
     const recognizedText  = document.getElementById('recognized-text');
@@ -51,6 +55,17 @@
         if (bytes < 1024) return bytes + ' B';
         if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
         return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    /**
+     * Escape HTML special characters to prevent XSS.
+     * @param {string} text
+     * @returns {string}
+     */
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 
     /** Clear any previous file-validation error message. */
@@ -183,6 +198,7 @@
 
         const formData = new FormData();
         formData.append('image', selectedFile);
+        formData.append('language', languageSelect.value);
 
         try {
             const response = await fetch('/evaluate', {
@@ -230,10 +246,13 @@
      *   recognized_text: string,
      *   corrected_code:  string,
      *   auto_corrected:  boolean,
+     *   language:        string,
      *   stdout:          string,
      *   stderr:          string,
      *   execution_status: 'success' | 'error' | 'timeout',
-     *   processing_time_seconds: number
+     *   processing_time_seconds: number,
+     *   sandbox_mode:    string,
+     *   diagnostics:     Array<{line?: number, message: string, suggestion?: string}>
      * }
      */
     function populateResults(data) {
@@ -285,6 +304,57 @@
             executionTime.textContent = `Processed in ${data.processing_time_seconds.toFixed(2)} s`;
         } else {
             executionTime.textContent = '';
+        }
+
+        // Truncation warning
+        let truncationWarning = document.getElementById('truncation-warning');
+        if (!truncationWarning) {
+            truncationWarning = document.createElement('div');
+            truncationWarning.id = 'truncation-warning';
+            truncationWarning.className = 'truncation-warning';
+            executionTime.parentNode.appendChild(truncationWarning);
+        }
+        if (data.stdout_truncated || data.stderr_truncated) {
+            const parts = [];
+            if (data.stdout_truncated) {
+                parts.push(`stdout was ${data.original_stdout_length.toLocaleString()} chars (truncated to 10,000)`);
+            }
+            if (data.stderr_truncated) {
+                parts.push(`stderr was ${data.original_stderr_length.toLocaleString()} chars (truncated to 10,000)`);
+            }
+            truncationWarning.textContent = '⚠ Output truncated: ' + parts.join('; ');
+            truncationWarning.hidden = false;
+        } else {
+            truncationWarning.hidden = true;
+        }
+
+        // Sandbox mode warning
+        if (data.sandbox_mode && data.sandbox_mode !== 'docker') {
+            sandboxWarning.hidden = false;
+        } else {
+            sandboxWarning.hidden = true;
+        }
+
+        // Diagnostics
+        if (data.diagnostics && data.diagnostics.length > 0) {
+            diagnosticsList.innerHTML = '';
+            data.diagnostics.forEach(function(diag) {
+                const li = document.createElement('li');
+                li.className = 'diagnostic-item';
+                let html = '';
+                if (diag.line) {
+                    html += '<span class="diag-line">Line ' + diag.line + ':</span> ';
+                }
+                html += '<span class="diag-message">' + escapeHtml(diag.message) + '</span>';
+                if (diag.suggestion) {
+                    html += '<br><span class="diag-suggestion">💡 ' + escapeHtml(diag.suggestion) + '</span>';
+                }
+                li.innerHTML = html;
+                diagnosticsList.appendChild(li);
+            });
+            diagnosticsCard.hidden = false;
+        } else {
+            diagnosticsCard.hidden = true;
         }
 
         // Reveal results with animation

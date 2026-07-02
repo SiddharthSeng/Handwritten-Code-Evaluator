@@ -28,6 +28,9 @@ Thumbs.db
 .env
 .env.local
 
+# SQLite runtime database (generated on first request)
+evaluations.db
+
 # Model cache (downloaded on first run)
 models/
 *.bin
