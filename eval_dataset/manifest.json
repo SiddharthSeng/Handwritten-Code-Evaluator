@@ -1,0 +1,182 @@
+[
+  {
+    "id": "001",
+    "difficulty": "easy",
+    "note": "simple assignment",
+    "image": "sample_001.png",
+    "ground_truth": "sample_001.py",
+    "lines": 1,
+    "chars": 6
+  },
+  {
+    "id": "002",
+    "difficulty": "easy",
+    "note": "arithmetic expression",
+    "image": "sample_002.png",
+    "ground_truth": "sample_002.py",
+    "lines": 1,
+    "chars": 18
+  },
+  {
+    "id": "003",
+    "difficulty": "easy",
+    "note": "print statement",
+    "image": "sample_003.png",
+    "ground_truth": "sample_003.py",
+    "lines": 1,
+    "chars": 22
+  },
+  {
+    "id": "004",
+    "difficulty": "easy",
+    "note": "string assignment",
+    "image": "sample_004.png",
+    "ground_truth": "sample_004.py",
+    "lines": 1,
+    "chars": 14
+  },
+  {
+    "id": "005",
+    "difficulty": "easy",
+    "note": "boolean expression",
+    "image": "sample_005.png",
+    "ground_truth": "sample_005.py",
+    "lines": 1,
+    "chars": 15
+  },
+  {
+    "id": "006",
+    "difficulty": "medium",
+    "note": "if-else",
+    "image": "sample_006.png",
+    "ground_truth": "sample_006.py",
+    "lines": 5,
+    "chars": 69
+  },
+  {
+    "id": "007",
+    "difficulty": "medium",
+    "note": "for loop with range",
+    "image": "sample_007.png",
+    "ground_truth": "sample_007.py",
+    "lines": 4,
+    "chars": 57
+  },
+  {
+    "id": "008",
+    "difficulty": "medium",
+    "note": "while loop",
+    "image": "sample_008.png",
+    "ground_truth": "sample_008.py",
+    "lines": 4,
+    "chars": 43
+  },
+  {
+    "id": "009",
+    "difficulty": "medium",
+    "note": "simple function def",
+    "image": "sample_009.png",
+    "ground_truth": "sample_009.py",
+    "lines": 3,
+    "chars": 48
+  },
+  {
+    "id": "010",
+    "difficulty": "medium",
+    "note": "list operations",
+    "image": "sample_010.png",
+    "ground_truth": "sample_010.py",
+    "lines": 3,
+    "chars": 54
+  },
+  {
+    "id": "011",
+    "difficulty": "medium",
+    "note": "l vs 1 ambiguity: variable 'l1' and literal 1",
+    "image": "sample_011.png",
+    "ground_truth": "sample_011.py",
+    "lines": 3,
+    "chars": 29
+  },
+  {
+    "id": "012",
+    "difficulty": "medium",
+    "note": "O vs 0 ambiguity: zero in arithmetic",
+    "image": "sample_012.png",
+    "ground_truth": "sample_012.py",
+    "lines": 4,
+    "chars": 64
+  },
+  {
+    "id": "013",
+    "difficulty": "medium",
+    "note": "I vs 1 ambiguity: index starting at 1",
+    "image": "sample_013.png",
+    "ground_truth": "sample_013.py",
+    "lines": 3,
+    "chars": 42
+  },
+  {
+    "id": "014",
+    "difficulty": "hard",
+    "note": "nested if inside for",
+    "image": "sample_014.png",
+    "ground_truth": "sample_014.py",
+    "lines": 5,
+    "chars": 99
+  },
+  {
+    "id": "015",
+    "difficulty": "hard",
+    "note": "function with loop and conditional",
+    "image": "sample_015.png",
+    "ground_truth": "sample_015.py",
+    "lines": 6,
+    "chars": 120
+  },
+  {
+    "id": "016",
+    "difficulty": "hard",
+    "note": "list comprehension",
+    "image": "sample_016.png",
+    "ground_truth": "sample_016.py",
+    "lines": 2,
+    "chars": 52
+  },
+  {
+    "id": "017",
+    "difficulty": "hard",
+    "note": "dictionary usage",
+    "image": "sample_017.png",
+    "ground_truth": "sample_017.py",
+    "lines": 3,
+    "chars": 91
+  },
+  {
+    "id": "018",
+    "difficulty": "hard",
+    "note": "string methods \u2014 multiple ambiguous chars",
+    "image": "sample_018.png",
+    "ground_truth": "sample_018.py",
+    "lines": 3,
+    "chars": 59
+  },
+  {
+    "id": "019",
+    "difficulty": "hard",
+    "note": "try-except",
+    "image": "sample_019.png",
+    "ground_truth": "sample_019.py",
+    "lines": 4,
+    "chars": 69
+  },
+  {
+    "id": "020",
+    "difficulty": "hard",
+    "note": "class definition",
+    "image": "sample_020.png",
+    "ground_truth": "sample_020.py",
+    "lines": 8,
+    "chars": 153
+  }
+]

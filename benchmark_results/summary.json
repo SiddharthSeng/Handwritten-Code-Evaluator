@@ -1,0 +1,42 @@
+{
+  "dataset": "eval_dataset",
+  "n_samples": 20,
+  "dataset_type": "SYNTHETIC_PROXY (Inkfree font, NOT real handwriting)",
+  "model": "microsoft/trocr-base-handwritten",
+  "aggregate": {
+    "avg_cer": 1.0492,
+    "avg_wer": 1.5016,
+    "exact_match_accuracy": 0.0,
+    "execution_success_rate": 0.15
+  },
+  "by_difficulty": {
+    "easy": {
+      "n": 5,
+      "avg_cer": 0.433,
+      "avg_wer": 1.7333,
+      "exact_match_rate": 0.0,
+      "execution_success_rate": 0.6
+    },
+    "medium": {
+      "n": 8,
+      "avg_cer": 1.4745,
+      "avg_wer": 1.3215,
+      "exact_match_rate": 0.0,
+      "execution_success_rate": 0.0
+    },
+    "hard": {
+      "n": 7,
+      "avg_cer": 1.0033,
+      "avg_wer": 1.5419,
+      "exact_match_rate": 0.0,
+      "execution_success_rate": 0.0
+    }
+  },
+  "notes": [
+    "CER and WER can exceed 1.0 for very short reference strings with many OCR errors.",
+    "Execution Success Rate uses ast.parse() -- it checks syntax validity, not runtime correctness.",
+    "Exact Match requires the corrected output to exactly equal the ground truth after strip().",
+    "SYNTHETIC PROXY: Images rendered with Inkfree.ttf, a clean digital handwriting font.",
+    "These numbers likely OVERESTIMATE accuracy vs. real photographed handwriting."
+  ]
+}

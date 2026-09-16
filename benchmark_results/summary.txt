@@ -1,0 +1,66 @@
+=================================================================
+HANDWRITTEN CODE EVALUATOR -- BENCHMARK REPORT
+=================================================================
+
+IMPORTANT: SYNTHETIC PROXY DATASET
+  Images were rendered with Inkfree.ttf (a clean digital
+  handwriting-style font bundled with Windows), NOT from
+  real photographed handwriting samples.
+  Results likely OVERESTIMATE real-world accuracy.
+  Label these as: 'Synthetic proxy (Inkfree font)'.
+
+Model      : microsoft/trocr-base-handwritten
+Dataset    : eval_dataset
+Samples    : 20
+
+AGGREGATE METRICS (on corrected output vs. ground truth)
+-----------------------------------------------------------------
+  CER  (Character Error Rate)   : 1.0492  (104.9%)
+  WER  (Word/Token Error Rate)  : 1.5016  (150.2%)
+  EM   (Exact Match Accuracy)   : 0.0000  (0.0%)
+  ESR  (Execution Success Rate) : 0.1500  (15.0%)
+
+BY DIFFICULTY
+-----------------------------------------------------------------
+  EASY   (n=5)
+    CER=0.4330  WER=1.7333  EM=0.0000  ESR=0.6000
+  MEDIUM (n=8)
+    CER=1.4745  WER=1.3215  EM=0.0000  ESR=0.0000
+  HARD   (n=7)
+    CER=1.0033  WER=1.5419  EM=0.0000  ESR=0.0000
+
+PER-SAMPLE RESULTS
+-----------------------------------------------------------------
+  [001] easy   parse  CER=0.667  WER=1.000  -- simple assignment
+  [002] easy   FAIL   CER=0.444  WER=1.000  -- arithmetic expression
+  [003] easy   parse  CER=0.364  WER=4.000  -- print statement
+  [004] easy   parse  CER=0.357  WER=1.667  -- string assignment
+  [005] easy   FAIL   CER=0.333  WER=1.000  -- boolean expression
+  [006] medium FAIL   CER=3.870  WER=2.200  -- if-else
+  [007] medium FAIL   CER=2.211  WER=1.091  -- for loop with range
+  [008] medium FAIL   CER=1.581  WER=0.923  -- while loop
+  [009] medium FAIL   CER=0.333  WER=1.571  -- simple function def
+  [010] medium FAIL   CER=0.463  WER=1.222  -- list operations
+  [011] medium FAIL   CER=0.586  WER=1.000  -- l vs 1 ambiguity: variable 'l1' and literal 1
+  [012] medium FAIL   CER=2.109  WER=1.231  -- O vs 0 ambiguity: zero in arithmetic
+  [013] medium FAIL   CER=0.643  WER=1.333  -- I vs 1 ambiguity: index starting at 1
+  [014] hard   FAIL   CER=0.586  WER=1.688  -- nested if inside for
+  [015] hard   FAIL   CER=0.242  WER=1.167  -- function with loop and conditional
+  [016] hard   FAIL   CER=0.308  WER=1.100  -- list comprehension
+  [017] hard   FAIL   CER=1.516  WER=1.846  -- dictionary usage
+  [018] hard   FAIL   CER=0.288  WER=1.750  -- string methods — multiple ambiguous chars
+  [019] hard   FAIL   CER=3.783  WER=2.125  -- try-except
+  [020] hard   FAIL   CER=0.301  WER=1.118  -- class definition
+
+METRIC DEFINITIONS
+-----------------------------------------------------------------
+  CER  = Levenshtein(predicted, reference) / len(reference)
+  WER  = token-level Levenshtein / len(reference_tokens)
+  EM   = predicted.strip() == reference.strip()
+  ESR  = ast.parse(corrected_code) succeeds without SyntaxError
+
+OUTPUT FILES
+-----------------------------------------------------------------
+  Per-sample CSV : benchmark_results\per_sample.csv
+  Summary JSON   : benchmark_results\summary.json
+=================================================================
