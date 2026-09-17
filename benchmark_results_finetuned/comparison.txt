@@ -1,0 +1,45 @@
+=================================================================
+FINE-TUNING BENCHMARK REPORT -- BEFORE vs AFTER
+=================================================================
+
+DATASET: SYNTHETIC PROXY (Inkfree font + Augraphy augmentation)
+  NOT real photographed handwriting. Results label as:
+  'Synthetic fine-tuning benchmark, not real handwriting.'
+
+Test set : finetune_dataset\test  (100 samples, never seen during training)
+Device   : CPU
+
+METRIC DEFINITIONS
+  CER = char edit distance / len(reference)   [lower is better]
+  WER = token edit distance / len(ref tokens) [lower is better]
+  EM  = exact string match                    [higher is better]
+  ESR = ast.parse(predicted) succeeds         [higher is better]
+
+-----------------------------------------------------------------
+Metric           Baseline   Fine-tuned        Delta       Result
+-----------------------------------------------------------------
+CER               0.7461      0.7226      -0.0235  IMPROVED
+WER               1.2164      1.2616      +0.0452  REGRESSED
+EM Acc.           0.0100      0.0000      -0.0100  REGRESSED
+ESR               0.2200      0.0600      -0.1600  REGRESSED
+-----------------------------------------------------------------
+
+TRAINING SUMMARY (from finetuned_model/training.log)
+  Epoch 1:  train=3.4649  eval=1.7761  (20m 06s)
+  Epoch 2:  train=1.4191  eval=1.2479  (19m 50s)
+  Epoch 3:  train=0.8530  eval=0.9689  (20m 03s)
+  Epoch 4:  train=0.5469  eval=0.8705  (20m 44s)
+  Epoch 5:  train=0.2690  eval=0.7790  (19m 44s)
+  Total training time: 100.8 minutes on CPU
+
+HONESTY CAVEATS
+  1. Both benchmark runs use the same synthetic test set.
+     The fine-tuned model was trained on images from the same
+     synthetic distribution (same fonts, same augmentation).
+     Improvement on this test set does NOT prove improvement
+     on real photographed handwriting.
+  2. The original 20-sample baseline (15% ESR) was measured on
+     the separate eval_dataset/ (different image set).
+     This report's baseline is re-measured on the same 100
+     test images for a fair apples-to-apples comparison.
+=================================================================

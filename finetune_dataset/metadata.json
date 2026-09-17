@@ -1,0 +1,51 @@
+{
+  "total": 1000,
+  "splits": {
+    "train": 800,
+    "val": 100,
+    "test": 100
+  },
+  "fonts_used": [
+    "Inkfree",
+    "Lucida_HW",
+    "Comic_Sans",
+    "Comic_Sans_Italic",
+    "Segoe_Print",
+    "Segoe_Script",
+    "French_Script",
+    "Script_Bold",
+    "Segoe_Print_Bold",
+    "Segoe_Script_Bold"
+  ],
+  "augmentation": "augraphy",
+  "dataset_type": "SYNTHETIC (font-rendered + augmented, NOT real handwriting)",
+  "focus_distribution": {
+    "dict_literal": 46,
+    "if_else": 48,
+    "list_literal": 52,
+    "compound_assign": 58,
+    "boolean": 43,
+    "print": 53,
+    "class_def": 32,
+    "indexing": 35,
+    "comparison": 59,
+    "try_except": 30,
+    "for_loop": 47,
+    "assignment": 82,
+    "arithmetic": 73,
+    "nested_brackets": 38,
+    "multi_assign": 39,
+    "return": 44,
+    "function_def": 48,
+    "function_call": 40,
+    "while_loop": 39,
+    "slicing": 33,
+    "list_comp": 33,
+    "fstring": 28
+  },
+  "difficulty_distribution": {
+    "medium": 387,
+    "easy": 452,
+    "hard": 161
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "test_set": "finetune_dataset\\test",
+  "n_samples": 100,
+  "dataset_type": "SYNTHETIC PROXY (Inkfree font + augmentation, NOT real handwriting)",
+  "note": "Both models evaluated on identical held-out test set (never seen during training/val)",
+  "baseline": {
+    "tag": "baseline",
+    "model": "microsoft/trocr-base-handwritten",
+    "n_samples": 100,
+    "avg_cer": 0.7461,
+    "avg_wer": 1.2164,
+    "exact_match_accuracy": 0.01,
+    "execution_success_rate": 0.22
+  },
+  "finetuned": {
+    "tag": "finetuned",
+    "model": "finetuned_model/final",
+    "n_samples": 100,
+    "avg_cer": 0.7226,
+    "avg_wer": 1.2616,
+    "exact_match_accuracy": 0.0,
+    "execution_success_rate": 0.06
+  },
+  "delta": {
+    "cer_abs": -0.0235,
+    "wer_abs": 0.0452,
+    "em_abs": -0.01,
+    "esr_abs": -0.16
+  }
+}
